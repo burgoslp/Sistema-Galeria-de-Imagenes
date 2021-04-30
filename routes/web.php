@@ -1,5 +1,14 @@
 <?php
-
+use App\categoria;
+use App\coleccione;
+use App\dat_civile;
+use App\dat_sexo;
+use App\estatu;
+use App\foto;
+use App\metadata;
+use App\persona;
+use App\role;
+use App\user;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +21,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    
+
+
+    echo "todo bien";
 });
