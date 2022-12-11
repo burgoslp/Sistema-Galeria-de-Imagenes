@@ -16,9 +16,9 @@ class persona extends Model
 
     public function foto(){
 
-        return $this->hasOne(foto::class);
+        return $this->hasMany(foto::class);
     }
 
-    protected $fillable=["nombre","apellido","cedula"];
+    protected $fillable=["nombre","apellido","cedula",'dat_civile_id','dat_sexo_id','correo'];
     protected $table="personas";
 }

@@ -12,12 +12,12 @@ class roleTableSeeder extends Seeder
     public function run()
     {
         
-
-        $role=new role;
-        $role->nombre="User";
-        $role->descripcion="Rol de los fotografos";
-        $role->save();
-
+        /*
+            $role=new role;
+            $role->nombre="User";
+            $role->descripcion="Rol de los fotografos";
+            $role->save();
+        */
 
         $role=new role;
         $role->nombre="Operador";

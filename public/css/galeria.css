@@ -1,0 +1,143 @@
+:root{
+
+    --colorborder: rgba(146,159,176,0.4);
+    --coloriconpanel: rgba(146,159,176);
+    --coloriconpanelselect: rgba(1,104,250)
+}
+.visible{
+
+    border-right:  1px solid  var(--colorborder);
+    border-left:  1px solid  var(--colorborder);
+}
+
+.visibleb{
+    border-bottom: 1px solid var(--colorborder)
+}
+
+.no-boton{
+
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.no-input{
+
+    border: none;
+    padding: 0
+    
+}
+
+.no-input:focus{
+
+    outline: none;
+
+}
+
+.logotipo{
+
+    font-size: 32px;
+    font-family: arial;
+   
+}
+
+.logotipo:hover{
+
+    text-decoration: none;
+   
+}
+
+/*estilos del panel de navegacion horizontal*/
+.panel-top{
+    z-index: 10;
+    width: 100vw;	
+    overflow: hidden;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+
+}
+
+
+/*estilos del panel de navegacion vertical*/
+.panel-left{
+
+    height: 100vh;
+    width: 58px;
+    position: fixed;
+    overflow: hidden;
+    background-color: white; 
+    z-index: 9;
+    white-space: nowrap;
+    transition: width 0.1s ease
+}
+
+.panel-left:hover{
+
+    width: 270px;
+    transition: width 0.1s ease
+}
+.iconpanel{
+    
+    color:var(--coloriconpanel);
+    cursor:pointer;
+    border-left:3px solid white;
+
+
+}
+
+.iconpanelSelected{
+    
+    border-left:3px solid var(--coloriconpanelselect);
+}
+
+.iconpanelSelected a{
+    color: var(--coloriconpanelselect) ;
+}
+
+
+
+.iconpanelConfig{
+    background-color: #B5B0B0; 
+    border-radius: 50%; 
+    padding:4px;
+    color: gray;
+}
+
+
+/*estilos del panel de creacion*/
+
+.panel-create{
+
+    position:fixed;
+    display:flex; 
+    justify-content:center;
+    align-items: center;
+    top:0;
+    z-index:20000;
+    background-color: rgba(0,0,0,0.5); 
+    width: 100vw; 
+    height: 100vh;
+}
+
+.panel-create form{
+
+    border-radius:10px;
+    padding: 20px;
+    width:300px;
+    background-color:white;
+}
+
+.panel-create input{
+
+    width: 100%;
+    padding: 5px;
+}
+
+.panel-create select{
+
+    border:1px solid gray;
+}

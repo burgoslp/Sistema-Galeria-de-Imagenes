@@ -12,6 +12,10 @@ class categoriaTableSeeder extends Seeder
     public function run()
     {
         $categorias=new categoria;
+        $categorias->descripcion="Ambiente";
+        $categorias->save();
+
+        $categorias=new categoria;
         $categorias->descripcion="Deportes";
         $categorias->save();
 

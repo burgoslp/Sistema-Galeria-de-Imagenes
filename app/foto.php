@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\categoria;
 use App\coleccione;
 use App\metadata;
+use App\persona;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class foto extends Model
 {
     //
-
+    use SoftDeletes;
     public function categorias(){
 
         return $this->belongsToMany(categoria::class)->withTimestamps();
@@ -17,14 +19,15 @@ class foto extends Model
 
     public function coleccion(){
 
-        return $this->belongsTo(coleccione::class)
+        return $this->belongsTo(coleccione::class);
     }
 
-    public function metadata(){
+    public function fotografo(){
 
-        return $this->belongsTo(metadata::class);
+        return $this->belongsTo(persona::class);
     }
 
-    protected $fillable=["ruta"];
+    
+    protected $fillable=["persona_id","coleccione_id","estatu_id","author","descripcion","locacion","fecha","url"];
     protected $table="fotos";
 }

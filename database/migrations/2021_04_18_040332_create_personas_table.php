@@ -21,6 +21,7 @@ class CreatePersonasTable extends Migration
             $table->string('apellido');
             $table->string('cedula')->unique();
             $table->string('correo');
+            $table->softdeletes();
             $table->timestamps();
         });
     }
