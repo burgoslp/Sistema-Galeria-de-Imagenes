@@ -13,7 +13,8 @@ use App\role;
 use App\coleccione;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\DB;
-
+use DateTime;
+use DateInterval;
 class administradorController extends Controller
 {
     
@@ -286,12 +287,6 @@ class administradorController extends Controller
     }
 
 
-    public function contenido(){
-
-        echo "todo bien";
-    }
-
-
     public function reportes(){
 
         $fotos=count(foto::all());
@@ -474,91 +469,221 @@ class administradorController extends Controller
                 $mes1='octubre'; 
                 break;
         }
-        $fotomes3=count(foto::whereBetween('fecha',['2022-'.$mesActual.'-01','2022-'.$mesActual.'-30'])->get());
-        $fotomes2=count(foto::whereBetween('fecha',['2022-'.$mesAnterior.'-01','2022-'.$mesAnterior.'-30'])->get());
-        $fotomes1=count(foto::whereBetween('fecha',['2022-'.$mesInicial.'-01','2022-'.$mesInicial.'-30'])->get());
+        $fotomes3=count(foto::whereBetween('fecha',['2023-'.$mesActual.'-01','2023-'.$mesActual.'-30'])->get());
+        $fotomes2=count(foto::whereBetween('fecha',['2023-'.$mesAnterior.'-01','2023-'.$mesAnterior.'-30'])->get());
+        $fotomes1=count(foto::whereBetween('fecha',['2023-'.$mesInicial.'-01','2023-'.$mesInicial.'-30'])->get());
 
         $canTrimestre=[$fotomes3,$fotomes2,$fotomes1];
         $trimestre=[$mes3, $mes2,$mes1];
         return view('administrador.graficas',compact('canTrimestre','trimestre'));
     }
 
-    function graficasImagenes(){
-        $mesActual=date("m");
-        $mesAnterior=$mesActual-1 < 10 ? '0'.$mesActual-1:$mesActual-1;
-        $mesInicial=$mesActual-2 < 10 ? '0'.$mesActual-2:$mesActual-2;
-        $trimestre=array();
-        $canTrimestre=array();
-        switch ($mesActual) {
-            case 1:
-                $mes3='enero';
-                $mes2='diciembre';
-                $mes1='noviembre';
-                break;
-            case 2:
-                $mes3='febrero';
-                $mes2='enero';
-                $mes1='diciembre';
-                break;
-            case 3:
-                $mes3='marzo';
-                $mes2='febrero';
-                $mes1='enero';
+    function graficasImagenes(Request $request){
 
-                break;
-            case 4:
-                $mes3='abril';
-                $mes2='marzo';
-                $mes1='febrero';
-                break;
-            case 5:
-                $mes3='mayo';
-                $mes2='abril';
-                $mes1='marzo';
-                break;
-            case 6:
-                $mes3='junio';
-                $mes2='mayo';
-                $mes1='abril';
-                break;
-            case 7:
-                $mes3='julio';
-                $mes2='junio';
-                $mes1='mayo';
-                break;
-            case 8:
-                $mes3='agosto';
-                $mes2='julio';
-                $mes1='junio';
-                break;
-            case 9:
-                $mes3='septiembre';
-                $mes2='agosto';
-                $mes1='julio';
-                break;
-            case 10:
-                $mes3='octubre';
-                $mes2='septiembre';
-                $mes1='agosto';
-                break;
-            case 11:
-                $mes3='noviembre';
-                $mes2='octubre';
-                $mes1='septiembre';
-                break;
-            case 12:
-                $mes3='diciembre';
-                $mes2='noviembre';
-                $mes1='octubre';   
-                break;
+        $data=$request->all();
+        $colecciones=coleccione::all();
+        $fotografos=persona::all();
+        $tipoGrafica='line';
+        if(empty($data)){
+
+            
+            return view('administrador.graficasImagenes',compact('colecciones','fotografos','tipoGrafica'));
+
+        }else{
+            $fotosCant=array();
+            if($data['fechaInicial'] <> null && $data['fechafinal'] <> null){
+
+                
+                $arrayCantMeses=$this->cantMeses(array($data['fechaInicial'],$data['fechafinal']));               
+                foreach($arrayCantMeses as $mes){
+                    switch ($mes) {
+                        case '01';
+                            $fotos=DB::table('fotos');
+                            $fotos=DB::table('fotos');
+                            $fotos->whereBetween('created_at',['2023-01-01', '2023-01-30']);
+                        break;
+                        case '02';
+                            $fotos=DB::table('fotos');
+                            $fotos=DB::table('fotos');
+                            $fotos->whereBetween('created_at',['2023-02-01', '2023-02-30']);
+                        break;
+                        case '03';
+                            $fotos=DB::table('fotos');
+                            $fotos=DB::table('fotos');
+                            $fotos->whereBetween('created_at',['2023-03-01', '2023-03-30']);
+                        break;
+                        case '04';
+                            $fotos=DB::table('fotos');
+                            $fotos=DB::table('fotos');
+                            $fotos->whereBetween('created_at',['2023-04-01', '2023-04-30']);
+                        break;
+                        case '05';
+                            $fotos=DB::table('fotos');
+                            $fotos=DB::table('fotos');
+                            $fotos->whereBetween('created_at',['2023-05-01', '2023-05-30']);
+                        break;
+                        case '06';
+                            $fotos=DB::table('fotos');
+                            $fotos=DB::table('fotos');
+                            $fotos->whereBetween('created_at',['2023-06-01', '2023-06-30']);
+                        break;
+                        case '07';
+                            $fotos=DB::table('fotos');
+                            $fotos=DB::table('fotos');
+                            $fotos->whereBetween('created_at',['2023-07-01', '2023-07-30']);
+                        break;
+                        case '08';
+                            $fotos=DB::table('fotos');
+                            $fotos=DB::table('fotos');
+                            $fotos->whereBetween('created_at',['2023-08-01', '2023-08-30']);
+                        break;
+                        case '09';
+                            $fotos=DB::table('fotos');
+                            $fotos=DB::table('fotos');
+                            $fotos->whereBetween('created_at',['2023-09-01', '2023-09-30']);
+                        break;
+                        case '10':
+                            $fotos=DB::table('fotos');
+                            $fotos=DB::table('fotos');
+                            $fotos->whereBetween('created_at',['2023-10-01', '2023-10-30']);
+
+                            
+                            
+                            break;
+                        case '11':
+                            $fotos=DB::table('fotos');
+                            $fotos=DB::table('fotos');
+                            $fotos->whereBetween('created_at',['2023-11-01', '2023-11-30']);
+
+                            
+
+                            break;
+                        case '12':
+                            $fotos=DB::table('fotos');
+                            $fotos=DB::table('fotos');
+                            $fotos->whereBetween('created_at',['2023-12-01', '2023-12-30']);         
+
+                           
+
+                            break;
+                    }
+                    if($data['id_estatusPublicado'] <> null && $data['id_estatusPublicado'] <> -1){//criterio publicado
+                        $fotos->where('estatu_id',$data['id_estatusPublicado']);
+                    }
+                    if($data['id_estatusEliminado'] <> null && $data['id_estatusEliminado'] <> -1){//criterio eliminado
+                        if($data['id_estatusEliminado'] == 1){
+                            $fotos->whereNotNull('deleted_at');
+                        }else{
+                            $fotos->whereNull('deleted_at');
+                        }
+                    }
+                    if($data['id_estatusEliminado'] <> null && $data['id_estatusEliminado'] <> -1){//criterio eliminado
+                        if($data['id_estatusEliminado'] == 1){
+                            $fotos->whereNotNull('deleted_at');
+                        }else{
+                            $fotos->whereNull('deleted_at');
+                        }
+                    }
+                    if($data['id_coleccion'] <> null && $data['id_coleccion'] <> -1){//criterio colección
+                        $fotos->where('coleccione_id',$data['id_coleccion']);
+                    }        
+                    if($data['autor'] <> null && $data['autor'] <> -1){//criterio autor
+                       $fotos->where('persona_id',$data['autor']);
+                    }
+                    if($data['tipoGrafica'] <> null && $data['tipoGrafica'] <> -1){//criterio tipo grafica
+                        switch ($data['tipoGrafica']) {
+                            case '1':
+                                $tipoGrafica='line';
+                                break;
+                            case '2':
+                                $tipoGrafica='bar';
+                                break;
+                            case '3':
+                                $tipoGrafica='doughnut';
+                                break;
+                        }
+
+                    }
+                    $fotos=$fotos->get();
+                    array_push($fotosCant,count($fotos));
+                }
+            }
+            $stringfotosCant=implode(",", $fotosCant);
+            $stringArrayMeses=implode(',',$this->nomMeses($arrayCantMeses));
+           return view('administrador.graficasImagenes',compact('stringfotosCant','stringArrayMeses','colecciones','fotografos','tipoGrafica'));
+        }       
+
+    }
+
+
+    public function cantMeses($a){
+        $f1 = new DateTime( $a[0] );
+        $f2 = new DateTime( $a[1] );
+        $mesInicial=$f1->format('m');
+        $mesFinal=$f2->format('m');
+        $m=0;
+        if($mesInicial!=$mesFinal){
+            while($mesInicial!=$mesFinal){
+          
+                $mesInicial=date("m", mktime(0, 0, 0, $f1->format('m')+$m, 1, $f1->format('Y')));                        
+                $meses[$m]=$mesInicial;
+                $m++;
+            }
+        }else{
+            $meses[0]=$mesFinal;
         }
-        
-        $fotomes3=count(foto::whereBetween('fecha',['2022-'.$mesActual.'-01','2022-'.$mesActual.'-30'])->get());
-        $fotomes2=count(foto::whereBetween('fecha',['2022-'.$mesAnterior.'-01','2022-'.$mesAnterior.'-30'])->get());
-        $fotomes1=count(foto::whereBetween('fecha',['2022-'.$mesInicial.'-01','2022-'.$mesInicial.'-30'])->get());
+        return $meses;
+    }
 
-        $canTrimestre=[$fotomes3,$fotomes2,$fotomes1];
-        $trimestre=[$mes3, $mes2,$mes1];
-        return view('administrador.graficasImagenes',compact('canTrimestre','trimestre'));
+    public function nomMeses($numMeses){
+        $m=0;
+        $nomMeses=array();
+        foreach($numMeses as $mes){
+            switch ($mes) {
+                case '01':
+                    $nomMeses[$m]="Enero";
+                    break;
+                case '02':
+                    $nomMeses[$m]="Febrero";
+                    break;
+                case '03':
+                    $nomMeses[$m]="Marzo";
+                    break;
+                case '04':
+                    $nomMeses[$m]="Abril";
+                    break;
+                case '05':
+                    $nomMeses[$m]="Mayo";
+                    break; 
+                case '06':
+                    $nomMeses[$m]="Junio";
+                    break;
+                case '07':
+                    $nomMeses[$m]="Julio";
+                    break;
+                case '08':
+                    $nomMeses[$m]="Agosto";
+                    break;
+                case '09':
+                    $nomMeses[$m]="Septiembre";
+                    break;
+                case '10':
+                    $nomMeses[$m]="Octubre";
+                    break;
+                case '11':
+                    $nomMeses[$m]="Noviembre";
+                    break;
+                case '12':
+                    $nomMeses[$m]="Diciembre";
+                    break;
+            }
+            $m++;
+        }
+        return $nomMeses;
+    }
+
+    public function cmsIndex(){
+
+        return view('administrador.contenido');
     }
 }

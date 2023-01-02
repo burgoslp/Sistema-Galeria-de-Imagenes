@@ -3,7 +3,7 @@
 @include('layouts.partials.enlacesReportes')  
 <div class="row pl-md-5 pt-5">
     <div class="col  pl-5 pr-5">
-        <form action="{{route('reportesImagenes')}}" method="GET">
+        <form action="{{route('graficasImagenes')}}" method="GET">
             <table class="table table-bordered">
                 <tr>
                     <td>
@@ -13,11 +13,6 @@
                     <td>
                         Hasta:
                     </td>
-
-                    <td>
-                        Categoria:
-                    </td>
-
                     <td>
                         Publicado:
                     </td>
@@ -31,14 +26,6 @@
                     </td>
                     <td>
                         <input name="fechafinal" class="form-control" type="date">
-                    </td>
-                    <td>
-                        <select name="id_categoria" class="custom-select " id="">
-                            <option value="-1" selectd>
-                                Seleccione
-                            </option>
-                           
-                        </select>
                     </td>
                     <td>
                         <select name="id_estatusPublicado" class="custom-select " id="">
@@ -72,15 +59,14 @@
                         Coleccion:
                     </td>
                    <td>
-                        Ubicación:
-                    </td>
-                   <td>
                         Autor:
                     </td>
                     <td>
                         Tipo de grafica
                     </td>
-                   
+                    <td>
+                        Acción
+                    </td>
                 </tr>               
 
                 <tr>
@@ -89,21 +75,21 @@
                             <option  value="-1" selectd>
                                 Seleccione
                             </option>
-                          
-                        </select>
-                    </td>
-                    <td>
-                        <select name="id_ubicacion" class="custom-select " id="">
-                            <option  value="-1" selectd>
-                                Seleccione
+                            @foreach($colecciones as $coleccion)
+                            <option  value="{{$coleccion->id}}">
+                                {{$coleccion->descripcion}}
                             </option>
-                           
+                            @endforeach
                         </select>
                     </td>
                     <td>
                         <select name="autor" id="autor" class="custom-select ">
                             <option value="-1">Seleccione</option>
-                           
+                            @foreach($fotografos as $fotografo)
+                            <option  value="{{$fotografo->id}}">
+                                {{$fotografo->nombre}} {{$fotografo->apellido}}
+                            </option>
+                            @endforeach
                         </select>
                     </td>
 
@@ -112,7 +98,7 @@
                         <option value="-1">Seleccione</option>
                             <option value="1">lineal</option>
                             <option value="2">Barra</option>
-                            <option value="2">Dona</option>
+                            <option value="3">Dona</option>
                            
                         </select>
                     </td>
@@ -129,8 +115,15 @@
 
 <div class="row pl-md-5 pt-5">
     <div class="col  pl-5 pr-5">
-        <h2>Grafica de productividad</h1>
-        <canvas id="myChart"></canvas>
+        <h2>Grafica de productividad </h1>
+        @if(!empty($stringfotosCant))
+            <canvas id="myChart"></canvas>
+        @else
+        
+        <div class="alert alert-info p-5" role="alert">
+            INGRESE ALGUNO DE LOS CRITERIOS PARA OBTENER LA GRAFICA DESEADA
+        </div>
+        @endif
     </div>
 </div>
 
@@ -138,14 +131,24 @@
 
 <script>
   const ctx = document.getElementById('myChart');
-
+@php
+    if(!empty($stringfotosCant)){
+        if(strpos($stringfotosCant,',')){
+           echo sprintf('let arrayMeses="%s",arrayCantFotos="%s",tipoGrafica="%s"; arrayMeses=arrayMeses.split(","); arrayCantFotos=arrayCantFotos.split(",");',$stringArrayMeses,$stringfotosCant,$tipoGrafica);
+        }else{
+            echo sprintf('let arrayMeses=["%s"],arrayCantFotos=[%s],tipoGrafica="%s";',$stringArrayMeses,$stringfotosCant,$tipoGrafica);
+        }
+    }else{
+        echo sprintf('let ArrayMeses=["ningun mes para mostrar"],arrayCantFotos[0];');
+    }
+@endphp
   new Chart(ctx, {
-    type: 'doughnut',
+    type: tipoGrafica,
     data: {
-      labels: ["{{$trimestre[0]}}", '{{$trimestre[1]}}', '{{$trimestre[2]}}'],
+      labels: arrayMeses,
       datasets: [{
-        label: '# of Votes',
-        data: [{{$canTrimestre[0]}}, {{$canTrimestre[1]}}, {{$canTrimestre[2]}}],
+        label: '# cantidad de fotos en el rango seleccionado',
+        data: arrayCantFotos,
         borderWidth: 1
       }]
     },

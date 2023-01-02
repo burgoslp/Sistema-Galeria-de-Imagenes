@@ -64,7 +64,9 @@ Route::get('/admin/colecciones','administradorController@colecciones')->middlewa
 Route::get('/admin/coleccion/{id}','administradorController@verColecciones')->middleware('auth','role:admin');
 Route::get('/admin/agregar/coleccion/{id}','administradorController@agregarColeccion')->middleware('auth','role:admin');
 Route::get('/admin/publicado','administradorController@fotosPublicadas')->middleware('auth','role:admin');
-Route::get('/admin/contenido','administradorController@contenido')->middleware('auth','role:admin');
+
+
+Route::get('/admin/cms','administradorController@cmsIndex')->middleware('auth','role:admin')->name('cms');
 
 
 Route::get('/admin/reportes','administradorController@reportes')->middleware('auth','role:admin')->name('reportes');
