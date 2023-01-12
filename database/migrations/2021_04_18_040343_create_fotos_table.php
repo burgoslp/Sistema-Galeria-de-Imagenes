@@ -18,6 +18,7 @@ class CreateFotosTable extends Migration
             $table->integer('persona_id');
             $table->integer('coleccione_id')->nullable();
             $table->integer('estatu_id');
+            $table->integer('categoria_id')->nullable();
             $table->string('descripcion');
             $table->string('locacion');
             $table->string('fecha');

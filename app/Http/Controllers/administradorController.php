@@ -15,6 +15,10 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\DB;
 use DateTime;
 use DateInterval;
+use App\logo;
+use App\social;
+use App\direccion;
+use App\telefono;
 class administradorController extends Controller
 {
     
@@ -376,9 +380,9 @@ class administradorController extends Controller
             if($data['id_estatusEliminado'] <> null && $data['id_estatusEliminado'] <> -1){
 
                 if($data['id_estatusEliminado'] == 1){
-                  $fotos->whereNotNull('deleted_at');
+                  $fotos->whereNotNull('fotos.deleted_at');
                 }else{
-                  $fotos->whereNull('deleted_at');
+                  $fotos->whereNull('fotos.deleted_at');
                 }
             }
 
@@ -681,9 +685,370 @@ class administradorController extends Controller
         }
         return $nomMeses;
     }
-
+    ///////////////////////////////////////////////////////////////////////////
+    //funciones del cms
     public function cmsIndex(){
 
         return view('administrador.contenido');
+    }
+
+    public function Logos(){
+        $logos=logo::all();
+        return view('administrador.logos',compact('logos'));
+    }
+    public function agregarLogo(Request $request){
+       
+        $data=$request->all();
+
+       if($data['estatu_id']==1){
+            $logos=logo::where('estatu_id','1')->get();
+            if(count($logos)==0){
+                if ($imagen=$request->file('file')) {
+                    $ruta="images/cms/logos";
+                    if(!file_exists($ruta)){
+                        mkdir($ruta);
+                    }
+                    $nombre_imagen=$imagen->getClientOriginalName();
+                    $imagen->move($ruta,$nombre_imagen);
+                    $data['url']=$nombre_imagen;
+                }
+                logo::create($data);
+            }else{
+                foreach($logos as $logo){
+                    $logoActivo=logo::find($logo->id);
+                    $logoActivo->estatu_id=2;
+                    $logoActivo->save();
+                }
+                if ($imagen=$request->file('file')) {
+                    $ruta="images/cms/logos";
+                    if(!file_exists($ruta)){
+                        mkdir($ruta);
+                    }
+                    $nombre_imagen=$imagen->getClientOriginalName();
+                    $imagen->move($ruta,$nombre_imagen);
+                    $data['url']=$nombre_imagen;
+                }
+                logo::create($data);
+            }
+       }else{
+            if ($imagen=$request->file('file')) {
+                $ruta="images/cms/logos";
+                if(!file_exists($ruta)){
+                    mkdir($ruta);
+                }
+                $nombre_imagen=$imagen->getClientOriginalName();
+                $imagen->move($ruta,$nombre_imagen);
+                $data['url']=$nombre_imagen;
+            }
+            logo::create($data);
+       }
+        return redirect('/admin/cms/institucional/logos');
+    }
+    public function publicarLogo(Request $request){
+        
+        $data=$request->all();
+        $logoActivo=logo::where('estatu_id','1')->get();
+        $countLogoActivo=count($logoActivo);
+
+        if($countLogoActivo !=0){
+            foreach($logoActivo as $logo){
+                $logoActivo=logo::find($logo->id);
+                $logoActivo->estatu_id=2;
+                $logoActivo->save();
+            }
+            
+            $logo=logo::find($data['id']);
+            $logo->estatu_id=1;
+            $logo->save();
+        }else{
+            $logo=logo::find($data['id']);
+            $logo->estatu_id=1;
+            $logo->save();
+        }
+        return redirect('/admin/cms/institucional/logos');
+    }
+    public function sociales(){
+        $sociales=social::all();
+
+        return view('administrador.sociales',compact('sociales'));
+    }
+    public function agregarSocial(Request $request){
+        $data=$request->all();
+
+        switch ($data['empresa']) {
+            case 'Facebook':
+                if($data['estatu_id']==1){//activa
+                    $socialActiva=social::where('estatu_id','1')->where('empresa','Facebook')->get();
+                    if(count($socialActiva)!=0){
+                        foreach($socialActiva as $activa){
+                            $social=social::find($activa->id);
+                            $social->estatu_id=2;
+                            $social->save();
+                        }
+                       
+                        social::create($data);
+
+                    }else{
+                        social::create($data);
+                    }
+                }else{//inactiva
+                    social::create($data);
+                }
+                break;
+            case 'Linkedin':
+                if($data['estatu_id']==1){//activa
+                    $socialActiva=social::where('estatu_id','1')->where('empresa','Linkedin')->get();
+                    if(count($socialActiva)!=0){
+                        foreach($socialActiva as $activa){
+                            $social=social::find($activa->id);
+                            $social->estatu_id=2;
+                            $social->save();
+                        }
+                       
+                        social::create($data);
+
+                    }else{
+                        social::create($data);
+                    }
+                }else{//inactiva
+                    social::create($data);
+                }
+                break;
+            case 'Instagram':
+                if($data['estatu_id']==1){//activa
+                    $socialActiva=social::where('estatu_id','1')->where('empresa','Instagram')->get();
+                    if(count($socialActiva)!=0){
+                        foreach($socialActiva as $activa){
+                            $social=social::find($activa->id);
+                            $social->estatu_id=2;
+                            $social->save();
+                        }
+                       
+                        social::create($data);
+
+                    }else{
+                        social::create($data);
+                    }
+                }else{//inactiva
+                    social::create($data);
+                }
+                break;
+            case 'Twitter':
+                if($data['estatu_id']==1){//activa
+                    $socialActiva=social::where('estatu_id','1')->where('empresa','Twitter')->get();
+                    if(count($socialActiva)!=0){
+                        foreach($socialActiva as $activa){
+                            $social=social::find($activa->id);
+                            $social->estatu_id=2;
+                            $social->save();
+                        }
+                       
+                        social::create($data);
+
+                    }else{
+                        social::create($data);
+                    }
+                }else{//inactiva
+                    social::create($data);
+                }
+                break;
+        }
+        return redirect('/admin/cms/institucional/sociales');
+    }
+    public function publicarSocial(Request $request){
+        $data=$request->all();
+        
+        switch ($data['empresa']) {
+            case 'Facebook':
+                $socialActiva=social::where('estatu_id','1')->where('empresa','Facebook')->get();
+                if(count($socialActiva) !=0){
+                    foreach($socialActiva as $activa){
+                        $social=social::find($activa->id);
+                        $social->estatu_id=2;
+                        $social->save();
+                    }
+                    $social=social::find($data['id']);
+                    $social->estatu_id=1;
+                    $social->save();
+                }else{
+                    $social=social::find($data['id']);
+                    $social->estatu_id=1;
+                    $social->save();
+                }
+                break;
+            case 'Linkedin':
+                $socialActiva=social::where('estatu_id','1')->where('empresa','Linkedin')->get();
+                if(count($socialActiva) !=0){
+                    foreach($socialActiva as $activa){
+                        $social=social::find($activa->id);
+                        $social->estatu_id=2;
+                        $social->save();
+                    }
+                    $social=social::find($data['id']);
+                    $social->estatu_id=1;
+                    $social->save();
+                }else{
+                    $social=social::find($data['id']);
+                    $social->estatu_id=1;
+                    $social->save();
+                }
+                break;
+            case 'Instagram':
+                $socialActiva=social::where('estatu_id','1')->where('empresa','Instagram')->get();
+                if(count($socialActiva) !=0){
+                    foreach($socialActiva as $activa){
+                        $social=social::find($activa->id);
+                        $social->estatu_id=2;
+                        $social->save();
+                    }
+                    $social=social::find($data['id']);
+                    $social->estatu_id=1;
+                    $social->save();
+                }else{
+                    $social=social::find($data['id']);
+                    $social->estatu_id=1;
+                    $social->save();
+                }
+                break;
+            case 'Twitter':
+                $socialActiva=social::where('estatu_id','1')->where('empresa','Twitter')->get();
+                if(count($socialActiva) !=0){
+                    foreach($socialActiva as $activa){
+                        $social=social::find($activa->id);
+                        $social->estatu_id=2;
+                        $social->save();
+                    }
+                    $social=social::find($data['id']);
+                    $social->estatu_id=1;
+                    $social->save();
+                }else{
+                    $social=social::find($data['id']);
+                    $social->estatu_id=1;
+                    $social->save();
+                }
+                break;
+        }
+        return redirect('/admin/cms/institucional/sociales');
+    }
+    public function eliminarSocial(Request $request){
+        $data=$request->all();
+        $social=social::find($data['id']);
+        $social->delete();
+        return redirect('/admin/cms/institucional/sociales');
+    }
+
+    public function direcciones(){
+        $direcciones=direccion::all();
+        return view('administrador.direcciones',compact('direcciones'));
+    }
+
+    public function agregarDireccion(Request $request){
+        $data=$request->all();
+        if($data['estatu_id'] ==1){//activo
+            $direccionActiva=direccion::where('estatu_id','1')->get();
+            if(count($direccionActiva) !=0){
+                foreach($direccionActiva as $activa){
+                    $activa=direccion::find($activa->id);
+                    $activa->estatu_id=2;
+                    $activa->save();
+                }
+                direccion::create($data);
+            }else{  
+
+                direccion::create($data);
+            }
+        }else{//inactivo
+
+            direccion::create($data);
+        }
+        return redirect('/admin/cms/institucional/direcciones');
+    }
+    public function publicarDireccion(Request $request){
+        $data=$request->all();
+
+        $direccionActiva=direccion::where('estatu_id','1')->get();
+            if(count($direccionActiva) !=0){
+                foreach($direccionActiva as $activa){
+                    $activa=direccion::find($activa->id);
+                    $activa->estatu_id=2;
+                    $activa->save();
+                }
+                $direccion=direccion::find($data['id']);
+                $direccion->estatu_id=1;
+                $direccion->save();
+            }else{  
+
+                $direccion=direccion::find($data['id']);
+                $direccion->estatu_id=1;
+                $direccion->save();
+            }
+        return redirect('/admin/cms/institucional/direcciones');
+    }
+
+    public function eliminarDireccion(Request $request){
+        $data=$request->all();
+        $direccion=direccion::find($data['id']);
+        $direccion->delete();
+        return redirect('/admin/cms/institucional/direcciones');
+    }
+
+    public function telefonos(){
+        $telefonos=telefono::all();
+        return view('administrador.telefonos',compact('telefonos'));
+    }
+    public function agregarTelefono(Request $request){
+        $data=$request->all();
+        if($data['estatu_id'] ==1){//activo
+            $telefonoActiva=telefono::where('estatu_id','1')->get();
+            if(count($telefonoActiva) !=0){
+                foreach($telefonoActiva as $activa){
+                    $activa=telefono::find($activa->id);
+                    $activa->estatu_id=2;
+                    $activa->save();
+                }
+                telefono::create($data);
+            }else{  
+
+                telefono::create($data);
+            }
+        }else{//inactivo
+
+            telefono::create($data);
+        }
+        return redirect('/admin/cms/institucional/telefonos');
+    }
+
+    public function publicarTelefono(Request $request){
+        $data=$request->all();
+
+        $telefonoActiva=telefono::where('estatu_id','1')->get();
+            if(count($telefonoActiva) !=0){
+                foreach($telefonoActiva as $activa){
+                    $activa=telefono::find($activa->id);
+                    $activa->estatu_id=2;
+                    $activa->save();
+                }
+                $telefono=telefono::find($data['id']);
+                $telefono->estatu_id=1;
+                $telefono->save();
+            }else{  
+
+                $telefono=telefono::find($data['id']);
+                $telefono->estatu_id=1;
+                $telefono->save();
+            }
+        return redirect('/admin/cms/institucional/telefonos');
+    }
+
+    public function eliminarTelefono(Request $request){
+        $data=$request->all();
+        $telefono=telefono::find($data['id']);
+        $telefono->delete();
+        return redirect('/admin/cms/institucional/telefonos');
+    }
+
+    public function secciones(Request $request){
+
+        return view('administrador.secciones');
     }
 }

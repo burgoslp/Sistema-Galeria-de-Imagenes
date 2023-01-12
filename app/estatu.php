@@ -5,6 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\colecione;
 use App\foto;
+use App\direccion;
+use App\telefono;
+use App\social;
+use App\logo;
 class estatu extends Model
 {
     //
@@ -17,6 +21,26 @@ class estatu extends Model
     public function fotos(){
 
         return $this->hasMany(foto::class);
+
+    }
+    public function logos(){
+
+        return $this->hasMany(logo::class);
+
+    }
+    public function direcciones(){
+
+        return $this->hasMany(direccion::class);
+
+    }
+    public function telefonos(){
+
+        return $this->hasMany(telefono::class);
+
+    }
+    public function sociales(){
+
+        return $this->hasMany(social::class);
 
     }
     protected $fillable=["descripcion"];

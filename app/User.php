@@ -7,6 +7,10 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\role;
 use App\persona;
+use App\direccion;
+use App\telefono;
+use App\social;
+use App\logo;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -48,6 +52,22 @@ class User extends Authenticatable
     public function persona(){
 
         return $this->belongsTo(persona::class);
+    }
+    public function direcciones(){
+
+        return $this->hasMany(direccion::class);
+    }
+    public function telefonos(){
+
+        return $this->hasMany(telefono::class);
+    }
+    public function sociales(){
+
+        return $this->hasMany(sociales::class);
+    }
+    public function logos(){
+
+        return $this->hasMany(logos::class);
     }
 
 

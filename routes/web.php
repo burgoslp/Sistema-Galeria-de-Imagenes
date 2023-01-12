@@ -20,19 +20,8 @@ use App\user;
 |
 */
 //rutas del buscador
-Route::get('/', function () {
-    
-
-    return view('buscador');
-
-});
-
-Route::get('/home', function () {
-    
-
-    return view('buscador');
-
-});
+Route::get('/','buscadorController@index');
+Route::get('/home','buscadorController@index');
 
 
 //rutas del operador
@@ -53,6 +42,7 @@ Route::put('/operador/agregar/coleccion','operadorController@agregarfotoColeccio
 Route::put('/operador/coleccion','operadorController@eliminarFotoColecciones')->middleware('auth','role:operador');
 
 //rutas del administrador
+//parametros
 Route::get('/admin', 'administradorController@index')->middleware('auth','role:admin')->name('index');
 Route::get('/admin/fotografos', 'administradorController@fotografos')->middleware('auth','role:admin');
 Route::get('admin/categorias', 'administradorController@categorias')->middleware('auth','role:admin');
@@ -65,16 +55,30 @@ Route::get('/admin/coleccion/{id}','administradorController@verColecciones')->mi
 Route::get('/admin/agregar/coleccion/{id}','administradorController@agregarColeccion')->middleware('auth','role:admin');
 Route::get('/admin/publicado','administradorController@fotosPublicadas')->middleware('auth','role:admin');
 
+//cms
+Route::get('/admin/cms/institucional','administradorController@cmsIndex')->middleware('auth','role:admin')->name('cmsInstitucional');
+Route::get('/admin/cms/institucional/logos','administradorController@logos')->middleware('auth','role:admin')->name('cmsInstitucionalLogos');
+Route::get('/admin/cms/institucional/telefonos','administradorController@telefonos')->middleware('auth','role:admin')->name('cmsInstitucionalTelefonos');
+Route::get('/admin/cms/institucional/sociales','administradorController@sociales')->middleware('auth','role:admin')->name('cmsInstitucionalSociales');
+Route::get('/admin/cms/institucional/direcciones','administradorController@direcciones')->middleware('auth','role:admin')->name('cmsInstitucionalDirecciones');
+Route::get('/admin/cms/secciones','administradorController@secciones')->middleware('auth','role:admin')->name('cmsSecciones');
+Route::get('/admin/cms/secciones/encabezado','administradorController@encabezado')->middleware('auth','role:admin')->name('cmsSecciones');
 
-Route::get('/admin/cms','administradorController@cmsIndex')->middleware('auth','role:admin')->name('cms');
-
-
+//reportes graficas
 Route::get('/admin/reportes','administradorController@reportes')->middleware('auth','role:admin')->name('reportes');
 Route::get('/admin/reportes/fotografos','administradorController@reportesfotografos')->middleware('auth','role:admin')->name('reportesFotografos');
 Route::get('/admin/reportes/imagenes','administradorController@reportesimagenes')->middleware('auth','role:admin')->name('reportesImagenes');
 Route::get('/admin/graficas','administradorController@graficas')->middleware('auth','role:admin')->name('graficas');
 Route::get('/admin/graficas/imagenes','administradorController@graficasImagenes')->middleware('auth','role:admin')->name('graficasImagenes');
 
+Route::post('/admin/cms/institucional/logo','administradorController@agregarLogo')->middleware('auth','role:admin');
+Route::post('/admin/cms/institucional/logo/publicar','administradorController@publicarLogo')->middleware('auth','role:admin');
+Route::post('/admin/cms/institucional/sociales/','administradorController@agregarSocial')->middleware('auth','role:admin');
+Route::post('/admin/cms/institucional/sociales/publicar','administradorController@publicarSocial')->middleware('auth','role:admin');
+Route::post('/admin/cms/institucional/direcciones','administradorController@agregarDireccion')->middleware('auth','role:admin');
+Route::post('/admin/cms/institucional/direcciones/publicar','administradorController@publicarDireccion')->middleware('auth','role:admin');
+Route::post('/admin/cms/institucional/telefonos/','administradorController@agregarTelefono')->middleware('auth','role:admin');
+Route::post('/admin/cms/institucional/telefonos/publicar','administradorController@publicarTelefono')->middleware('auth','role:admin');
 
 Route::post('/admin/usuarios', 'administradorController@crearUsuarios')->middleware('auth','role:admin');
 Route::post('/admin/fotografia/publicar', 'administradorController@estatusFoto')->middleware('auth','role:admin');
@@ -95,6 +99,9 @@ Route::delete('/admin/estatus', 'administradorController@eliminarEstatus')->midd
 Route::delete('/admin/generos', 'administradorController@eliminarGeneros')->middleware('auth','role:admin');
 Route::delete('/admin/categorias', 'administradorController@eliminarCategorias')->middleware('auth','role:admin');
 Route::delete('/admin/colecciones', 'administradorController@eliminarColecciones')->middleware('auth','role:admin');
+Route::delete('/admin/cms/institucional/sociales','administradorController@eliminarSocial')->middleware('auth','role:admin');
+Route::delete('/admin/cms/institucional/direcciones','administradorController@eliminarDireccion')->middleware('auth','role:admin');
+Route::delete('/admin/cms/institucional/telefonos','administradorController@eliminarTelefono')->middleware('auth','role:admin');
 
 Route::put('/admin/coleccion', 'administradorController@eliminarColeccion')->middleware('auth','role:admin');
 Route::put('/admin/agregar/coleccion','administradorController@agregarfotoColeccion')->middleware('auth','role:admin');

@@ -15,10 +15,9 @@ class CreateDireccionesTable extends Migration
     {
         Schema::create('direcciones', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigIncrements('user_id');
-            $table->bigIncrements('estatu_id');
-            $table->bigIncrements('descripcion');
-
+            $table->integer('user_id');
+            $table->integer('estatu_id');
+            $table->string('descripcion');
             $table->timestamps();
         });
     }

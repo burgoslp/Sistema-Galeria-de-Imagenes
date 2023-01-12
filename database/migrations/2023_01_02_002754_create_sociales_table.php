@@ -15,10 +15,10 @@ class CreateSocialesTable extends Migration
     {
         Schema::create('sociales', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigIncrements('user_id');
-            $table->bigIncrements('estatu_id');
-            $table->bigIncrements('tipo');
-            $table->bigIncrements('descripcion');
+            $table->integer('user_id');
+            $table->integer('estatu_id');
+            $table->string('empresa');
+            $table->string('descripcion');
             $table->timestamps();
         });
     }
