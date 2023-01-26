@@ -10,9 +10,9 @@ class categoria extends Model
 
     public function fotos(){
 
-        return $this->belongsToMany(foto::class)->withTimestamps();
+        return $this->hasMany(foto::class);
     }
 
-    protected $fillable=["descripcion"];
+    protected $fillable=["estatu_id","descripcion"];
     protected $table="categorias";
 }

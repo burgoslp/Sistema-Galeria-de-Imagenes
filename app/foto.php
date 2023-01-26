@@ -14,7 +14,7 @@ class foto extends Model
     use SoftDeletes;
     public function categorias(){
 
-        return $this->belongsToMany(categoria::class)->withTimestamps();
+        return $this->belongsTo(categoria::class)->withTimestamps();
     }
 
     public function coleccion(){
@@ -28,6 +28,6 @@ class foto extends Model
     }
 
     
-    protected $fillable=["persona_id","coleccione_id","estatu_id","author","descripcion","locacion","fecha","url"];
+    protected $fillable=["persona_id","coleccione_id","estatu_id","categoria_id","seccion_id","author","descripcion","locacion","fecha","url"];
     protected $table="fotos";
 }

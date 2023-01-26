@@ -62,7 +62,8 @@ Route::get('/admin/cms/institucional/telefonos','administradorController@telefon
 Route::get('/admin/cms/institucional/sociales','administradorController@sociales')->middleware('auth','role:admin')->name('cmsInstitucionalSociales');
 Route::get('/admin/cms/institucional/direcciones','administradorController@direcciones')->middleware('auth','role:admin')->name('cmsInstitucionalDirecciones');
 Route::get('/admin/cms/secciones','administradorController@secciones')->middleware('auth','role:admin')->name('cmsSecciones');
-Route::get('/admin/cms/secciones/encabezado','administradorController@encabezado')->middleware('auth','role:admin')->name('cmsSecciones');
+Route::get('/admin/cms/secciones/encabezado','administradorController@encabezado')->middleware('auth','role:admin')->name('cmsSeccionesEncabezado');
+Route::get('/admin/cms/secciones/navegacion','administradorController@navegacion')->middleware('auth','role:admin')->name('cmsSeccionesNavegacion');
 
 //reportes graficas
 Route::get('/admin/reportes','administradorController@reportes')->middleware('auth','role:admin')->name('reportes');
@@ -79,6 +80,10 @@ Route::post('/admin/cms/institucional/direcciones','administradorController@agre
 Route::post('/admin/cms/institucional/direcciones/publicar','administradorController@publicarDireccion')->middleware('auth','role:admin');
 Route::post('/admin/cms/institucional/telefonos/','administradorController@agregarTelefono')->middleware('auth','role:admin');
 Route::post('/admin/cms/institucional/telefonos/publicar','administradorController@publicarTelefono')->middleware('auth','role:admin');
+Route::post('/admin/cms/secciones/encabezado/conectar','administradorController@encabezadoConectar')->middleware('auth','role:admin');
+Route::post('/admin/cms/secciones/encabezado/quitar','administradorController@encabezadoQuitar')->middleware('auth','role:admin');
+Route::post('/admin/cms/secciones/navegacion/publicar','administradorController@navegacionPublicar')->middleware('auth','role:admin');
+Route::post('/admin/cms/secciones/navegacion/quitar','administradorController@navegacionQuitar')->middleware('auth','role:admin');
 
 Route::post('/admin/usuarios', 'administradorController@crearUsuarios')->middleware('auth','role:admin');
 Route::post('/admin/fotografia/publicar', 'administradorController@estatusFoto')->middleware('auth','role:admin');

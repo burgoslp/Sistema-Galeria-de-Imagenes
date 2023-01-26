@@ -16,14 +16,14 @@
             </div>
             
             <div class="col bg-success  text-center rounded">
-               <a href="#" class="w-100 h-100 p-5 d-block">
+               <a href="{{url('/admin/cms/secciones/encabezado')}}" class="w-100 h-100 p-5 d-block">
                     <span class="lead">ENCABEZADO</span>
                </a>
             </div>
         </div>
         <div class="row m-0 bg-info text-center rounded">
             <div class="col">
-                <a href="#" class="w-100 h-100 p-2 d-block">
+                <a href="{{url('/admin/cms/secciones/navegacion')}}" class="w-100 h-100 p-2 d-block">
                     <span class="lead">NAVEGACION</span>
                 </a>
             </div>

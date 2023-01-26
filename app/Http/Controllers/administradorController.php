@@ -29,6 +29,7 @@ class administradorController extends Controller
         $fotografos=persona::with('foto')->get();
         $colecciones=coleccione::all();
         $categorias=categoria::all();
+        
         return view('administrador.index',compact('fotos','fotografos','colecciones','categorias'));
     }
 
@@ -370,7 +371,7 @@ class administradorController extends Controller
             }
 
             if($data['id_categoria'] <> null && $data['id_categoria'] <> -1){
-                $fotos->where('id_categoria',$data['id_categoria']);
+                $fotos->where('categoria_id',$data['id_categoria']);
             }
 
             if($data['id_estatusPublicado'] <> null && $data['id_estatusPublicado'] <> -1){
@@ -1050,5 +1051,79 @@ class administradorController extends Controller
     public function secciones(Request $request){
 
         return view('administrador.secciones');
+    }
+
+    public function encabezado(){
+        $fotosPublicadas=foto::where('estatu_id','1')->get();
+
+        return view('administrador.encabezado',compact('fotosPublicadas'));
+    }
+
+    public function encabezadoConectar(Request $request){
+
+        $data=$request->all();
+        $verificaSeccion=foto::where('seccion_id','1')->get();
+        if(count($verificaSeccion)==3){
+            $quitarFoto=foto::where('seccion_id','1')->offset(0)->limit(1)->get();
+            foreach($quitarFoto as $foto){
+                $updateFoto=foto::find($foto->id);
+                $updateFoto->seccion_id=null;
+                $updateFoto->save();
+            }
+            $publicadaConecta=foto::find($data['id']);
+            $publicadaConecta->seccion_id=1;
+            $publicadaConecta->save();
+        }else{
+            $publicadaConecta=foto::find($data['id']);
+            $publicadaConecta->seccion_id=1;
+            $publicadaConecta->save();
+        }
+        return redirect('/admin/cms/secciones/encabezado');         
+    }
+    public function encabezadoQuitar(Request $request){
+
+        $data=$request->all();
+        $fotoQuita=foto::find($data['id']);
+        $fotoQuita->seccion_id=null;
+        $fotoQuita->save();
+        return redirect('/admin/cms/secciones/encabezado');
+    }
+
+    public function navegacion(){
+        $categorias=categoria::all();
+       
+       return view('administrador.navegacion',compact('categorias'));
+    }
+
+    public function navegacionPublicar(Request $request){
+        $data=$request->all();
+        $verificacategoria=categoria::where('id',$data['id'])->get();
+        foreach($verificacategoria as $categoria){
+            $CantFotos=0;
+            foreach($categoria->fotos as $foto){
+                if($foto->estatu_id == 1){
+                    $CantFotos++;
+                }                                   
+            }
+        }
+
+        if($CantFotos < 6){
+            return redirect()->back()->with('error', 'Debe tener al menos 6 fotos publicadas para poner visible esta categoría.');
+        }else{
+            $categoria=categoria::find($data['id']);
+            $categoria->estatu_id=1;//activo
+            $categoria->save();
+            return redirect('/admin/cms/secciones/navegacion');
+        }       
+    }
+
+    public function navegacionQuitar(Request $request){
+        $data=$request->all();
+        $data=$request->all();
+        $categoria=categoria::find($data['id']);
+        $categoria->estatu_id=2;//inactivo
+        $categoria->save();
+
+        return redirect('/admin/cms/secciones/navegacion');
     }
 }

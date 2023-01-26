@@ -9,6 +9,7 @@ use App\direccion;
 use App\telefono;
 use App\social;
 use App\logo;
+use App\categoria;
 class estatu extends Model
 {
     //
@@ -41,6 +42,11 @@ class estatu extends Model
     public function sociales(){
 
         return $this->hasMany(social::class);
+
+    }
+    public function categorias(){
+
+        return $this->hasMany(categoria::class);
 
     }
     protected $fillable=["descripcion"];

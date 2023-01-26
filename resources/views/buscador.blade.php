@@ -151,54 +151,106 @@
             </div>
             @endforeach
             <div class="col p-0">
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                            <img class="d-block w-100" src="{{asset('images/login-carousel1.jpg')}}"  style="height:300px;" alt="First slide">
+                @if(count($fotosEncabezado) != 3)
+            
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                <img class="d-block w-100" src="{{asset('images/login-carousel1.jpg')}}"  style="height:300px;" alt="First slide">
+                                </div>
+                                <div class="carousel-item">
+                                <img class="d-block w-100" src="{{asset('images/login-carousel2.jpg')}}" style="height:300px;" alt="Second slide">
+                                </div>
+                                <div class="carousel-item">
+                                <img class="d-block w-100" src="{{asset('images/login-carousel3.jpg')}}" style="height:300px;" alt="Third slide">
+                                </div>
                             </div>
-                            <div class="carousel-item">
-                            <img class="d-block w-100" src="{{asset('images/login-carousel2.jpg')}}" style="height:300px;" alt="Second slide">
-                            </div>
-                            <div class="carousel-item">
-                            <img class="d-block w-100" src="{{asset('images/login-carousel3.jpg')}}" style="height:300px;" alt="Third slide">
-                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button"  height="50%" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button"  height="50%" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+                @else
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            @for ($i = 0; $i < count($fotosEncabezado); $i++)
+                                @if($i == 0)
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="{{$i}}" class="active"></li>
+                                @else
+                                    <li data-target="#carouselExampleIndicators" data-slide-to="{{$i}}"></li>
+                                @endif
+                            @endfor
+                        </ol>
+                        <div class="carousel-inner">
+                            @foreach($fotosEncabezado as $item)
+                                @if($loop->first)
+                                    <div class="carousel-item active">
+                                @else
+                                    <div class="carousel-item">
+                                @endif
+                                    <img class="d-block" style="height:300px; width:100%;" src="{{asset('images/fotografias/'.$item->persona_id.'/'.$item->url)}}" alt="{{$item->img}}">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>{{$item->locacion}}</h5>
+                                        <p>{{$item->descripcion}}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" height="50%" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
                     </div>
+                @endif
             </div>
         </header>
         <!--fin seccion de cabezera slider de imagenes, logo-->
-        <nav class="row" style="background-color:black;">
+        <nav class="row mb-5" style="background-color:black;">
             <div class="col p-0">
                 <ul class="nav">
+                    @if(count($categorias) !=0)
+                        @foreach($categorias as $categoria)
+                        <li class="nav-item">
+                            <a href="#" name="{{$categoria->descripcion}}" class="nav-link ">{{$categoria->descripcion}}</a>
+                        </li>
+                        @endforeach
+                    @else
                     <li class="nav-item">
-                        <a href="#" class="nav-link ">Belico</a>
+                        <a href="#" class="nav-link w-100">No hay navegación configurada</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link ">Ambiente</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link ">Economia</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Deportes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link ">Lugares</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link ">Politica</a>
-                    </li>
+                    @endif
                 </ul>
             </div>
         </nav>
+        @foreach($categorias as $categoria)
+            <section class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <h1>{{$categoria->descripcion}}</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach($fotosPublicadas as $publicadas)
+                            @if($publicadas->categoria_id == $categoria->id)   
+                                    <div class="col-4 mb-3">
+                                        <img src="{{asset('images/fotografias/'.$publicadas->persona_id.'/'.$publicadas->url)}}" alt="" width="100%" height="100%">
+                                    </div>
+                            @endif
+                        @endforeach  
+                    </div>
+                </div>
+            </section>
+        @endforeach
+        
         
     </div>
 

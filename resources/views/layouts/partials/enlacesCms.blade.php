@@ -6,7 +6,7 @@
                         <a class="nav-link {{Route::is('cmsInstitucional') || Route::is('cmsInstitucionalLogo') || Route::is('cmsInstitucionalLogos') || Route::is('cmsInstitucionalTelefonos') || Route::is('cmsInstitucionalSociales') || Route::is('cmsInstitucionalDirecciones')? 'active':''}}" href="{{url('admin/cms/institucional')}}">Institucional</a>
                 </li>
                 <li>
-                        <a class="nav-link {{Route::is('cmsSecciones')   ? 'active':''}}" href="{{url('admin/cms/secciones')}}">Secciones</a>
+                        <a class="nav-link {{Route::is('cmsSecciones')  || Route::is('cmsSeccionesEncabezado') || Route::is('cmsSeccionesNavegacion') ? 'active':''}}" href="{{url('admin/cms/secciones')}}">Secciones</a>
                 </li>
            </div>
            <div class="d-flex align-item-center">
@@ -45,6 +45,13 @@
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                     </svg>
                 </a>
+            @elseif(Route::is('cmsSeccionesEncabezado'))
+                <a class="nav-link d-flex align-items-center" href="#" data-toggle="modal" data-target="#modalCrearEncabezado">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </a>
            @endif
            </div>
         </ul>
@@ -58,9 +65,9 @@
             <a href="{{url('admin/cms/institucional/direcciones')}}" class="pr-5">direcciones</a>
             <a href="{{url('admin/cms/institucional/telefonos')}}" class="pr-5">Telefonos</a>
 
-        @elseif(Route::is('cmsSecciones'))
-            <a href="{{url('admin/cms/secciones')}}" class="pl-3 pr-5">Encabezado</a>
-            <a href="{{url('admin/cms/secciones')}}" class="pr-5">Navegación</a>
+        @elseif(Route::is('cmsSecciones') || Route::is('cmsSeccionesEncabezado') || Route::is('cmsSeccionesNavegacion'))
+            <a href="{{url('/admin/cms/secciones/encabezado')}}" class="pl-3 pr-5">Encabezado</a>
+            <a href="{{url('admin/cms/secciones/navegacion')}}" class="pr-5">Navegación</a>
         @endif
        
     </div>
