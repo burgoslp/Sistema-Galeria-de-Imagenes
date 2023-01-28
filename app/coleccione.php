@@ -13,6 +13,6 @@ class coleccione extends Model
         return $this->hasMany(foto::class);
     }
 
-    protected $fillable=["nombre","descripcion","fecha"];
+    protected $fillable=["user_id","nombre","descripcion","fecha"];
     protected $table="colecciones";
 }

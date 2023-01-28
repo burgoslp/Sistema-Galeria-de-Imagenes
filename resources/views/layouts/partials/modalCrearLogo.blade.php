@@ -12,7 +12,7 @@
         @csrf
         <div class="form-group">
                 <label for="exampleFormControlFile1">Archivo</label>
-                <input type="file" name="file" class="form-control-file" >
+                <input type="file" name="file" class="form-control-file"  required accept="image/*">
         </div>
         <span>Estatus:</span>
         <select name="estatu_id" class="form-control">

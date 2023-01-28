@@ -20,15 +20,15 @@
             </div>
             <div class="form-group">
                 <label for="">Nombre</label>
-                    <input class="form-control" name="name" type="text">
+                    <input class="form-control" name="name" type="text" required>
             </div>
             <div class="form-group">
                 <label for="">Correo</label>
-                    <input class="form-control" name="email" type="text">
+                    <input class="form-control" name="email" type="text" required>
             </div>
             <div class="form-group">
                 <label for="">Contraseña</label>
-                    <input class="form-control" name="password" type="password">
+                    <input class="form-control" name="password" type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Debe contener al menos un número y una letra mayúscula y minúscula, y al menos 8 o más caracteres">
             </div>
         </form>
       </div>

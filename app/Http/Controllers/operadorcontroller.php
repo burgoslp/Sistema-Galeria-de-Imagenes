@@ -68,6 +68,7 @@ class operadorcontroller extends Controller
         $coleccion->nombre=$request->nombre;
         $coleccion->descripcion=$request->descripcion;
         $coleccion->fecha=$request->fecha;
+        $coleccion->user_id=$request->user_id;
         $coleccion->save();
         return redirect('operador/colecciones');
     

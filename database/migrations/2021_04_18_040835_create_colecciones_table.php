@@ -15,6 +15,7 @@ class CreateColeccionesTable extends Migration
     {
         Schema::create('colecciones', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('user_id')->nullable();
             $table->string('nombre');
             $table->string('descripcion');
             $table->date('fecha');

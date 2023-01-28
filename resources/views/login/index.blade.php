@@ -5,7 +5,7 @@
     <div class="col d-flex flex-column justify-content-center align-items-center">
                     
         <div class="mb-4">
-            <img src="{{asset('images/login-logo.png')}}" alt="">
+            <img src="{{asset('images/login-logo.png')}}" width="400px" height="70px">
         </div>
 
         <div class="w-75  mt-4">
@@ -27,10 +27,10 @@
                 <div class="d-flex justify-content-end mb-4">
                     <input class="btn btn-dark mb-4 mb-md-1" type="submit" value="Iniciar sesion">
                 </div>
-
+                <!--
                 <div>
                     <a href="{{ route('password.request') }}">olvidaste tu contraseña?</a>
-                </div>
+                </div>-->
             </form>
         </div>
     </div>

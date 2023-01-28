@@ -16,15 +16,22 @@ class usersTableSeeder extends Seeder
         $user= new User;
         $user->name="Administrador";
         $user->email="administrador@gmail.com";
-        $user->password=bcrypt('12345678');
+        $user->password=bcrypt('Admin1234');
         $user->save();
         $user->roles()->attach(Role::where('nombre', 'admin')->first());
         
 
         $user= new User;
         $user->name="Operador";
-        $user->email="operador@gmail.com";
-        $user->password=bcrypt('12345678');
+        $user->email="operadorUltimasnoticias@gmail.com";
+        $user->password=bcrypt('Operador1234');
+        $user->save();
+        $user->roles()->attach(Role::where('nombre', 'operador')->first());
+        
+        $user= new User;
+        $user->name="Ministerio";
+        $user->email="ministerio@gmail.com";
+        $user->password=bcrypt('Ministerio1234');
         $user->save();
 
         $user->roles()->attach(Role::where('nombre', 'operador')->first());

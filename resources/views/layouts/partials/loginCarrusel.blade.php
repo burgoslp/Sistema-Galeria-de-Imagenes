@@ -27,7 +27,7 @@
                     <span class="sr-only">Next</span>
                 </a>
                 
-
+                <!--
                 <form action="" class="position-absolute d-flex p-4 w-75"  style="top:44%; left:12.5%; background-color:rgba(201,1,27,0.5);">
                     <button class="btn p-2" style="border-radius:0; border-right:none; background-color:rgb(201,1,27);">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-search" viewBox="0 0 16 16">
@@ -35,26 +35,27 @@
                         </svg>
                     </button>
                     <input class="form-control  w-100 p-2" style="border-radius:0; border:none;" type="text" placeholder="Buscar fotografia...">
-                </form>
+                </form>-->
 
 
                 <div class="position-absolute w-100 " style="top:5%;">
-                    <ul class="pl-0 d-flex lead text-center" style=" list-style: none; color:white;">
-                        <li class="w-100"><a href="" style="color:white;">Belico</a></li>
-                        <li class="w-100"><a href="" style="color:white;">Ambiente</a></li>
-                        <li class="w-100"><a href="" style="color:white;">Economia</a></li>
-                        <li class="w-100"><a href="" style="color:white;">Deportes</a></li>
-                        <li class="w-100"><a href="" style="color:white;">Lugares</a></li>
+                    <ul class="pl-0 d-flex lead text-center" style=" list-style: none;">
+                        <li class="w-100"><a href="{{url('/')}}" style="color:white;font-weight:bold; background-color:rgba(255,0,0,0.5); padding:5px 15px; border-radius:10px;">Belico</a></li>
+                        <li class="w-100"><a href="{{url('/')}}" style="color:white;font-weight:bold; background-color:rgba(255,0,0,0.5); padding:5px 15px;border-radius:10px;">Ambiente</a></li>
+                        <li class="w-100"><a href="{{url('/')}}" style="color:white;font-weight:bold; background-color:rgba(255,0,0,0.5); padding:5px 15px;border-radius:10px;">Economia</a></li>
+                        <li class="w-100"><a href="{{url('/')}}" style="color:white;font-weight:bold; background-color:rgba(255,0,0,0.5); padding:5px 15px;border-radius:10px;">Deportes</a></li>
+                        <li class="w-100"><a href="{{url('/')}}" style="color:white;font-weight:bold; background-color:rgba(255,0,0,0.5); padding:5px 15px;border-radius:10px;">Lugares</a></li>
                     </ul>
                 </div>
 
 
-
+                 <!--
                 <div class="position-absolute w-100" style="bottom:5%; left:6%; color:white;">
                 
                     <p>Fotografias de <a href="" data-toggle="modal" data-target="#exampleModal">Leopoldo pinedo</a></p>
                 </div>
-                <!-- Modal -->
+                Modal 
+                
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -74,5 +75,5 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
 </div>

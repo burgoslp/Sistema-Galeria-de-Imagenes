@@ -38,7 +38,7 @@
 
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">Descripción</label>
-                <textarea name="descripcion" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea name="descripcion" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
             </div>
 
            
@@ -46,17 +46,17 @@
             <div class="form-group">
 
                 <label for="">Locación</label>
-                <input class="form-control" name="locacion" type="text">
+                <input class="form-control" name="locacion" type="text" required>
             </div>
 
             <div class="form-group">
                 <label for="">Fecha</label>
-                <input class="form-control" name="fecha" type="text">
+                <input class="form-control" name="fecha" type="date" required>
             </div>
 
             <div class="form-group">
                 <label for="exampleFormControlFile1">Elige la fotografia</label>
-                <input type="file" name="file" class="form-control-file" >
+                <input type="file" name="file" class="form-control-file" required accept="image/*">
             </div>
         </form>
       </div>

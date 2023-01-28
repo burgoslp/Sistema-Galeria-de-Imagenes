@@ -12,7 +12,7 @@
         @csrf
         <div class="form-group">
             <label for="">Nombre</label>
-                <input class="form-control" name="descripcion" type="text">
+                <input class="form-control" name="descripcion" type="text" required>
             </div>
         </form>
       </div>

@@ -13,11 +13,11 @@ class daCivileTableSeeder extends Seeder
     public function run()
     {
         $civile=new dat_civile;
-        $civile->descripcion="Casado";
-        $civile->save();
-
-        $civile=new dat_civile;
         $civile->descripcion="Soltero";
+        $civile->save();
+        
+        $civile=new dat_civile;
+        $civile->descripcion="Casado";
         $civile->save();
 
         $civile=new dat_civile;

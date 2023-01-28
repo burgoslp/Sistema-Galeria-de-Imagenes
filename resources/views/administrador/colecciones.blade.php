@@ -39,6 +39,7 @@
                     <td>{{$coleccion->fecha}}</td>
                     <td>{{count($coleccion->fotos)}}</td>
                     <td class="d-flex justify-content-center align-items-center">
+                    
                         <form class="mb-0 mr-1" action="{{url('admin/colecciones')}}" method="post">
                             @csrf
                             <input type="hidden" name="_method" value="delete" />

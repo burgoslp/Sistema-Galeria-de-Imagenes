@@ -13,23 +13,27 @@ class categoriaTableSeeder extends Seeder
     {
         $categorias=new categoria;
         $categorias->descripcion="Ambiente";
-        $categorias->estatus_id=2;//inactivo
+        $categorias->estatu_id=2;//inactivo
         $categorias->save();
 
         $categorias=new categoria;
-        $categorias->descripcion=2;//inactivo
+        $categorias->descripcion="Belico";
+        $categorias->estatu_id=2;//inactivo
         $categorias->save();
 
         $categorias=new categoria;
-        $categorias->descripcion=2;//inactivo
+        $categorias->descripcion="Ciudad";
+        $categorias->estatu_id=2;//inactivo
         $categorias->save();
 
         $categorias=new categoria;
-        $categorias->descripcion=2;//inactivo
+        $categorias->descripcion="Popular";
+        $categorias->estatu_id=2;//inactivo
         $categorias->save();
 
         $categorias=new categoria;
-        $categorias->descripcion=2;//inactivo
+        $categorias->descripcion="Gobierno";
+        $categorias->estatu_id=2;//inactivo
         $categorias->save();
     }
 }

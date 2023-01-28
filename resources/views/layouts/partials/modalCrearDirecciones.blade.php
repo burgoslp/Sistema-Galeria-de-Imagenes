@@ -12,7 +12,7 @@
         @csrf
         <div class="form-group">
                 <label for="exampleFormControlFile1">Dirección</label>
-                <input type="text" name="descripcion" class="form-control" >
+                <input type="text" name="descripcion" class="form-control" required>
         </div>
         <span>Estatus:</span>
         <select name="estatu_id" class="form-control">

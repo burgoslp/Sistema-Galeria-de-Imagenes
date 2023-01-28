@@ -12,18 +12,21 @@
         @csrf
             <div class="form-group">
                 <label for="">Nombre</label>
-                    <input class="form-control" name="nombre" type="text">
+                    <input class="form-control" name="nombre" type="text" required>
             </div>
 
             <div class="form-group">
                 <label for="">Descripción</label><br>
-                   <textarea name="descripcion" class="form-control"></textarea>
+                   <textarea name="descripcion" class="form-control" required></textarea>
             </div>
 
             <div class="form-group">
                 <label for="">Fecha</label>
-                    <input class="form-control" name="fecha" type="date">
+                    <input class="form-control" name="fecha" type="date" required>
             </div>
+
+            <input class="form-control" name="user_id" type="text" value="{{auth()->id()}}">
+
         </form>
       </div>
       <div class="modal-footer">

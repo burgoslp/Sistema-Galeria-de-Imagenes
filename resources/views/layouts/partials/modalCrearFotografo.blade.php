@@ -12,21 +12,21 @@
         @csrf
             <div class="form-group">
                 <label for="">Nombre</label>
-                <input class="form-control" name="nombre" type="text">
+                <input class="form-control" name="nombre" type="text" required>
             </div>
             <div class="form-group">
                 <label for="">Apellido</label>
-                <input class="form-control" name="apellido" type="text">
+                <input class="form-control" name="apellido" type="text" required>
             </div>
             
             <div class="form-group">
                 <label for="">Cedula</label>
-                <input class="form-control" name="cedula" type="text">
+                <input class="form-control" name="cedula" type="text" required>
             </div>
 
             <div class="form-group">
                 <label for="">Correo</label>
-                <input class="form-control" name="correo" type="text">
+                <input class="form-control" name="correo" type="email" required>
             </div>
 
             <div class="form-group">

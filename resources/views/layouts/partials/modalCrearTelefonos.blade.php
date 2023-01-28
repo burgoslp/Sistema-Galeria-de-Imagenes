@@ -12,7 +12,7 @@
         @csrf
         <div class="form-group">
                 <label for="exampleFormControlFile1">Nr° de Telefono:</label>
-                <input type="text" name="descripcion" class="form-control" placeholder="0000-0000000">
+                <input type="text" name="descripcion" class="form-control" placeholder="0000-0000000" required>
         </div>
         <span>Estatus:</span>
         <select name="estatu_id" class="form-control">

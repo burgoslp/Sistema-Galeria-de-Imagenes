@@ -241,8 +241,10 @@ class administradorController extends Controller
         $coleccion->nombre=$request->nombre;
         $coleccion->descripcion=$request->descripcion;
         $coleccion->fecha=$request->fecha;
-        $coleccion->save();
-        return redirect('admin/colecciones');
+        $coleccion->user_id=$request->user_id;
+        echo $request->user_id;
+        //$coleccion->save();
+        //return redirect('admin/colecciones');
     }
 
     public function eliminarColecciones(Request $request){

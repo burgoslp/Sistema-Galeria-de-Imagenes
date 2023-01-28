@@ -12,7 +12,7 @@
         @csrf
         <div class="form-group">
             <label for="">url</label>
-                <input class="form-control" name="descripcion" type="text">
+                <input class="form-control" name="descripcion" type="text" required>
             </div>
             <span>Empresa:</span>
             <select name="empresa" class="form-control">
