@@ -80,3 +80,6 @@
     </div>
 </div>
 @endsection
+@section('modales')
+@include('layouts.partials.modalCrearEncabezado') 
+@endsection

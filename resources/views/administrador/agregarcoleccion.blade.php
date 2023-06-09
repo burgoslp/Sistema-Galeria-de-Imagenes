@@ -7,7 +7,7 @@
                         <img class="card-img-top" style="height:18rem;" src="{{asset('images/fotografias/'.$foto->persona_id.'/'.$foto->url)}}" alt="Card image cap">
                         <div class="card-body">
                            
-                        <form class="d-inline" action="{{url('/admin/agregar/coleccion')}}" method="POST">
+                        <form class="d-inline" action="{{url('/admin/coleccion/agregar')}}" method="POST">
                                 @csrf
                                 <input type="hidden" name="_method" value="put" />
                                 <input type="hidden" value="{{$foto->id}}" name="id">

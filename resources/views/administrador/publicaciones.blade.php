@@ -7,7 +7,7 @@
                         <img class="card-img-top" style="height:18rem;" src="{{asset('images/fotografias/'.$foto->persona_id.'/'.$foto->url)}}" alt="Card image cap">
                         <div class="card-body">
                            
-                        <form class="d-inline" action="{{url('/admin/fotografia/publicar')}}" method="POST">
+                        <form class="d-inline" action="{{url('/admin/publicaciones/modificaEstatusFoto')}}" method="POST">
                                 @csrf
                                 <input type="hidden" value="{{$foto->id}}" name="id">
                                 <button class="btn btn-success w-100" type="submit">Ocultar</button>

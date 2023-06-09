@@ -8,14 +8,16 @@
                         <div class="card-body">
                            
                             @if($fotos->estatu_id==2)
-                                <form class="d-inline" action="{{url('/admin/fotografia/publicar')}}" method="POST">
+                                <form class="d-inline" action="{{url('/admin/coleccion/modificaEstatusFoto')}}" method="POST">
                                     @csrf
+                                    <input type="hidden" name="_method" value="put" />
                                     <input type="hidden" value="{{$fotos->id}}" name="id">
                                     <button class="btn btn-primary" type="submit">Publicar</button>
                                 </form>
                             @else
-                                <form class="d-inline" action="{{url('/admin/fotografia/publicar')}}" method="POST">
+                                <form class="d-inline" action="{{url('/admin/coleccion/modificaEstatusFoto')}}" method="POST">
                                     @csrf
+                                    <input type="hidden" name="_method" value="put" />
                                     <input type="hidden" value="{{$fotos->id}}" name="id">
                                     <button class="btn btn-primary" type="submit">Ocultar</button>
                                 </form>

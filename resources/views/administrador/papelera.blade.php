@@ -9,7 +9,7 @@
                 </h1>
             </div>
             <div class="col-1">
-                <form action="{{url('/admin/fotografia/vaciar')}}" method="POST" class="d-inline-block">
+                <form action="{{url('/admin/papelera/vaciar')}}" method="POST" class="d-inline-block">
                 @csrf
                     <button type="submit" class="btn btn-danger">
                         <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" fill="currentColor" class="bi bi-basket" viewBox="0 0 16 16">
@@ -28,7 +28,7 @@
                 <div class="col-auto pt-4 pl-5 ">
                     <div class="card" style="width: 18rem; ">
                         <img class="card-img-top" style="height:15rem;" src="{{asset('images/fotografias/'.$fotos->persona_id.'/'.$fotos->url)}}" alt="Card image cap">
-                        <form action="{{url('/admin/fotografia/restaurar')}}" method="POST">
+                        <form action="{{url('/admin/papelera/restaurar')}}" method="POST">
                             @csrf
                             <input type="hidden" name="id" value="{{$fotos->id}}">
                             <button class="btn btn-success w-100" type="submit">Resctaurar</button>

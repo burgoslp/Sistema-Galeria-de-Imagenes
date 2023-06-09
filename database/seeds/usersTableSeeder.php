@@ -28,14 +28,5 @@ class usersTableSeeder extends Seeder
         $user->save();
         $user->roles()->attach(Role::where('nombre', 'operador')->first());
         
-        $user= new User;
-        $user->name="Ministerio";
-        $user->email="ministerio@gmail.com";
-        $user->password=bcrypt('Ministerio1234');
-        $user->save();
-
-        $user->roles()->attach(Role::where('nombre', 'operador')->first());
-
-
     }
 }

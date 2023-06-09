@@ -8,11 +8,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="form-crearfoto" enctype="multipart/form-data" action="{{url('/admin/categoria')}}" method="POST" >
+        <form id="form-crearfoto"  action="{{url('/admin/categoria')}}" method="POST" >
         @csrf
         <div class="form-group">
             <label for="">Nombre</label>
-                <input class="form-control" name="text" id="descripcion" name="descripcion" required> 
+                <input class="form-control" id="descripcion" name="descripcion" required> 
             </div>
         </form>
       </div>
